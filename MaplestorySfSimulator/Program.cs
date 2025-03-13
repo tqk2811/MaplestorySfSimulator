@@ -1,4 +1,5 @@
-﻿Dictionary<int, SfData> dict = new()
+﻿//https://maplestory.nexon.com/testworld/news/all/88
+Dictionary<int, SfData> dict = new()
 {
     { 15, new SfData(0.30f, 0.0210f, true)  },
     { 16, new SfData(0.30f, 0.0210f, true)  },
@@ -16,27 +17,37 @@
     { 28, new SfData(0.03f, 0.1940f)  },
     { 29, new SfData(0.01f, 0.1980f)  },
 };
-Dictionary<int, int> dictResult = new();
-for (int i = 15; i <= 30; i++)
-{
-    dictResult[i] = 0;
-}
 
 bool isSafeGuard = true;
 bool isSundayEvent = true;
 bool isStarCatch = true;
 int thread = Environment.ProcessorCount;
-int totalTry = 1_000_000;
-int tryCount = 0;
-object lockObj = new();
-object lockObj2 = new();
+int totalTry = 100_000_000;
 
-Task[] tasks = new Task[thread];
+Task<Dictionary<int, int>>[] tasks = new Task<Dictionary<int, int>>[thread];
 for (int i = 0; i < thread; i++)
 {
-    tasks[i] = Task.Factory.StartNew(SfThread, TaskCreationOptions.LongRunning);
+    int trycount = totalTry / thread;
+    if (i == thread - 1)
+    {
+        trycount = totalTry - (trycount * (thread - 1));
+    }
+    tasks[i] = Task.Factory.StartNew<Dictionary<int, int>>(() => SfThread(trycount), TaskCreationOptions.LongRunning);
 }
 await Task.WhenAll(tasks);
+
+Dictionary<int, int> dictResult = new();
+for (int i = 15; i <= 30; i++)
+{
+    dictResult[i] = 0;
+}
+foreach (var item in tasks)
+{
+    for (int i = 15; i <= 30; i++)
+    {
+        dictResult[i] += item.Result[i];
+    }
+}
 
 //print result
 Console.WriteLine($"SG:{isSafeGuard}");
@@ -73,30 +84,21 @@ int TrySf()
     }
     return start;
 }
-void SfThread()
+Dictionary<int, int> SfThread(int count)
 {
-    while (true)
+    Dictionary<int, int> dictResult = new();
+    for (int i = 15; i <= 30; i++)
     {
-        lock (lockObj)
-        {
-            if (tryCount >= totalTry)
-            {
-                return;
-            }
-            else
-            {
-                tryCount++;
-                Console.Title = tryCount.ToString();
-            }
-        }
-        int result = TrySf();
+        dictResult[i] = 0;
+    }
 
-        lock (lockObj2)
+    for (int i = 0; i < count; i++)
+    {
+        int result = TrySf();
+        for (int j = 15; j <= result; j++)
         {
-            for (int i = 15; i <= result; i++)
-            {
-                dictResult[i]++;
-            }
+            dictResult[j]++;
         }
     }
+    return dictResult;
 }

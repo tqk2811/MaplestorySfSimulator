@@ -18,6 +18,8 @@
     public float DestroyRate { get; set; }
     public float FailureRate => 1 - SuccessRate - DestroyRate;
 
+
+    //optimize
     readonly float SuccessRate_StarCatch;
     readonly float SuccessRateAndDestroyRate;
     readonly float SuccessRateAndDestroyRate_StarCatch;
