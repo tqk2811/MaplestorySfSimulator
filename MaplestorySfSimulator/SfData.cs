@@ -2,29 +2,38 @@
 {
     public SfData(float success, float destroy, bool isAllowSG = false)
     {
+        float destroyRateOfFailed = destroy / (1 - success);
+
+        float failedRate = 1 - success - destroy;//never changed
         this.SuccessRate = success;
         this.DestroyRate = destroy;
-        this.SuccessRate_StarCatch = success * 1.05f;
-
         this.SuccessRateAndDestroyRate = success + destroy;
-        SuccessRateAndDestroyRate_StarCatch = SuccessRate_StarCatch + destroy;
 
-        this.SuccessRateAndDestroyRateSunDayEvent = success + (destroy * 0.7f);
-        this.SuccessRateAndDestroyRateSunDayEvent_StarCatch = SuccessRate_StarCatch + (destroy * 0.7f);
+        this.SuccessRate_StarCatch = success * 1.05f;
+        float failedRate_StarCatch = 1 - SuccessRate_StarCatch;
+        this.DestroyRate_StarCatch = failedRate_StarCatch * destroyRateOfFailed;
+        this.SuccessRateAndDestroyRate_StarCatch = SuccessRate_StarCatch + DestroyRate_StarCatch;
+
+
+        float destroyRate_SunDayEvent = DestroyRate * 0.7f;
+        this.SuccessRateAndDestroyRate_SunDayEvent = success + destroyRate_SunDayEvent;
+
+        float destroyRate_SunDayEvent_StarCatch = DestroyRate_StarCatch * 0.7f;
+        this.SuccessRateAndDestroyRate_SunDayEvent_StarCatch = SuccessRate_StarCatch + destroyRate_SunDayEvent_StarCatch;
         this.IsAllowSG = isAllowSG;
     }
     public bool IsAllowSG { get; set; }
     public float SuccessRate { get; set; }
     public float DestroyRate { get; set; }
-    public float FailureRate => 1 - SuccessRate - DestroyRate;
 
 
-    //optimize
+    //pre calc for optimize
     readonly float SuccessRate_StarCatch;
+    readonly float DestroyRate_StarCatch;
     readonly float SuccessRateAndDestroyRate;
     readonly float SuccessRateAndDestroyRate_StarCatch;
-    readonly float SuccessRateAndDestroyRateSunDayEvent;
-    readonly float SuccessRateAndDestroyRateSunDayEvent_StarCatch;
+    readonly float SuccessRateAndDestroyRate_SunDayEvent;
+    readonly float SuccessRateAndDestroyRate_SunDayEvent_StarCatch;
     public EnhanceResult Enhance(int currentLevel, bool isSundayEvent, bool isStarCatch)
     {
         float random = (float)Random.Shared.NextDouble();
@@ -35,7 +44,7 @@
 
             if (isSundayEvent && currentLevel < 21)
             {
-                if (random < SuccessRateAndDestroyRateSunDayEvent_StarCatch)
+                if (random < SuccessRateAndDestroyRate_SunDayEvent_StarCatch)
                     return EnhanceResult.Destroy;
             }
             else
@@ -48,9 +57,10 @@
         {
             if (random < SuccessRate)
                 return EnhanceResult.Success;
+
             if (isSundayEvent && currentLevel < 21)
             {
-                if (random < SuccessRateAndDestroyRateSunDayEvent)
+                if (random < SuccessRateAndDestroyRate_SunDayEvent)
                     return EnhanceResult.Destroy;
             }
             else
