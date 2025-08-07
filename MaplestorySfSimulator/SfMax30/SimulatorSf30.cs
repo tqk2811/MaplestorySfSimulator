@@ -7,26 +7,26 @@ using System.Threading.Tasks;
 
 namespace MaplestorySfSimulator.SfMax30
 {
-    internal class SimulatorSf30
+    internal static class SimulatorSf30
     {
         //https://maplestory.nexon.com/testworld/news/all/88
-        static readonly IReadOnlyDictionary<int, SfData> dict = new Dictionary<int, SfData>()
+        static readonly IReadOnlyDictionary<int, SfData30> dict = new Dictionary<int, SfData30>()
         {
-            { 15, new SfData(0.30f, 0.0210f, true)  },
-            { 16, new SfData(0.30f, 0.0210f, true)  },
-            { 17, new SfData(0.15f, 0.0680f, true)  },
-            { 18, new SfData(0.15f, 0.0680f)  },
-            { 19, new SfData(0.15f, 0.0850f)  },
-            { 20, new SfData(0.30f, 0.1050f)  },
-            { 21, new SfData(0.15f, 0.1275f)  },
-            { 22, new SfData(0.15f, 0.1700f)  },
-            { 23, new SfData(0.10f, 0.1800f)  },
-            { 24, new SfData(0.10f, 0.1800f)  },
-            { 25, new SfData(0.10f, 0.1800f)  },
-            { 26, new SfData(0.07f, 0.1860f)  },
-            { 27, new SfData(0.05f, 0.1900f)  },
-            { 28, new SfData(0.03f, 0.1940f)  },
-            { 29, new SfData(0.01f, 0.1980f)  },
+            { 15, new SfData30(0.30f, 0.0210f, true)  },
+            { 16, new SfData30(0.30f, 0.0210f, true)  },
+            { 17, new SfData30(0.15f, 0.0680f, true)  },
+            { 18, new SfData30(0.15f, 0.0680f)  },
+            { 19, new SfData30(0.15f, 0.0850f)  },
+            { 20, new SfData30(0.30f, 0.1050f)  },
+            { 21, new SfData30(0.15f, 0.1275f)  },
+            { 22, new SfData30(0.15f, 0.1700f)  },
+            { 23, new SfData30(0.10f, 0.1800f)  },
+            { 24, new SfData30(0.10f, 0.1800f)  },
+            { 25, new SfData30(0.10f, 0.1800f)  },
+            { 26, new SfData30(0.07f, 0.1860f)  },
+            { 27, new SfData30(0.05f, 0.1900f)  },
+            { 28, new SfData30(0.03f, 0.1940f)  },
+            { 29, new SfData30(0.01f, 0.1980f)  },
         };
 
         public static async Task TestAsync(
