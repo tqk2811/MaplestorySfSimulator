@@ -96,7 +96,7 @@ namespace MaplestorySfSimulator.SfMax25
                 switch (dict[start].Enhance(start, isSafeGuard, isStarCatch))
                 {
                     case EnhanceResult.Failure:
-                        if (start != 15 && start != 20)
+                        if ((isSafeGuard ? start != 17 : start != 15) && start != 20)
                         {
                             start--;
                         }
