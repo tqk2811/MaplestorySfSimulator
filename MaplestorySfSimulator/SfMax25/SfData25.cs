@@ -46,14 +46,14 @@ namespace MaplestorySfSimulator.SfMax25
             {
                 if (random < SuccessRate_StarCatch)
                     return EnhanceResult.Success;
-                if (random < SuccessRateAndDestroyRate_StarCatch)
+                if (!(IsAllowSG && isSafeGuard) && random < SuccessRateAndDestroyRate_StarCatch)
                     return EnhanceResult.Destroy;
             }
             else
             {
                 if (random < SuccessRate)
                     return EnhanceResult.Success;
-                if (random < SuccessRateAndDestroyRate)
+                if (!(IsAllowSG && isSafeGuard) && random < SuccessRateAndDestroyRate)
                     return EnhanceResult.Destroy;
             }
             return EnhanceResult.Failure;
