@@ -90,8 +90,8 @@ namespace MaplestorySfSimulator.SfMax25
         //return max result
         static int TrySf(bool isSafeGuard, bool isStarCatch)
         {
-            int start = isSafeGuard ? 18 : 15;
-            while (start < 30)
+            int start = isSafeGuard ? 17 : 15;
+            while (start < 25)
             {
                 switch (dict[start].Enhance(start, isSafeGuard, isStarCatch))
                 {
