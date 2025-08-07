@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MaplestorySfSimulator.SfMax25
 {
     internal static class SimulatorSf25
-    {        //https://maplestory.nexon.com/testworld/news/all/88
+    {
         static readonly IReadOnlyDictionary<int, SfData25> dict = new Dictionary<int, SfData25>()
         {
             { 15, new SfData25(0.3f, 0.0210f, true)  },
@@ -28,7 +28,6 @@ namespace MaplestorySfSimulator.SfMax25
            )
         {
             int thread = Environment.ProcessorCount;
-
             Task<Dictionary<int, int>>[] tasks = new Task<Dictionary<int, int>>[thread];
             for (int i = 0; i < thread; i++)
             {
@@ -45,13 +44,13 @@ namespace MaplestorySfSimulator.SfMax25
             await Task.WhenAll(tasks);
 
             Dictionary<int, int> dictResult = new();
-            for (int i = 15; i <= 30; i++)
+            for (int i = 15; i <= 25; i++)
             {
                 dictResult[i] = 0;
             }
             foreach (var item in tasks)
             {
-                for (int i = 15; i <= 30; i++)
+                for (int i = 15; i <= 25; i++)
                 {
                     dictResult[i] += item.Result[i];
                 }
@@ -60,8 +59,8 @@ namespace MaplestorySfSimulator.SfMax25
             //print result
             Console.WriteLine($"SafeGuard:{isSafeGuard}");
             Console.WriteLine($"StarCatch:{isStarCatch}");
-            Console.WriteLine($"Total Try:{totalTry}");
-            for (int i = 15; i <= 30; i++)
+            Console.WriteLine($"Total Try:{totalTry:D3}");
+            for (int i = 15; i <= 25; i++)
             {
                 float spares = (float)totalTry / dictResult[i];
                 Console.WriteLine($"{i} star => \t{spares:0.00} spares");
@@ -72,7 +71,7 @@ namespace MaplestorySfSimulator.SfMax25
         static Dictionary<int, int> SfThread(int count, bool isSafeGuard, bool isStarCatch)
         {
             Dictionary<int, int> dictResult = new();
-            for (int i = 15; i <= 30; i++)
+            for (int i = 15; i <= 25; i++)
             {
                 dictResult[i] = 0;
             }
@@ -91,22 +90,28 @@ namespace MaplestorySfSimulator.SfMax25
         static int TrySf(bool isSafeGuard, bool isStarCatch)
         {
             int start = isSafeGuard ? 17 : 15;
+            int max = start;
             while (start < 25)
             {
                 switch (dict[start].Enhance(start, isSafeGuard, isStarCatch))
                 {
                     case EnhanceResult.Failure:
+                        if (start != 15 && start != 20)
+                        {
+                            start--;
+                        }
                         break;
 
                     case EnhanceResult.Destroy:
-                        return start;
+                        return max;
 
                     case EnhanceResult.Success:
                         start++;
+                        max = Math.Max(start, max);
                         break;
                 }
             }
-            return start;
+            return max;
         }
     }
 }

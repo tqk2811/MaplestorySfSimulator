@@ -21,11 +21,6 @@ namespace MaplestorySfSimulator.SfMax25
             float failedRate_StarCatch = 1 - SuccessRate_StarCatch;
             this.DestroyRate_StarCatch = failedRate_StarCatch * destroyRateOfFailed;
             this.SuccessRateAndDestroyRate_StarCatch = SuccessRate_StarCatch + DestroyRate_StarCatch;
-
-
-            float destroyRate_SunDayEvent = DestroyRate * 0.7f;
-
-            float destroyRate_SunDayEvent_StarCatch = DestroyRate_StarCatch * 0.7f;
             this.IsAllowSG = isAllowSG;
         }
 
