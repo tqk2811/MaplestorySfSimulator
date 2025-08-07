@@ -67,7 +67,7 @@ namespace MaplestorySfSimulator.SfMax30
             }
 
             //print result
-            Console.WriteLine($"SG:{isSafeGuard}");
+            Console.WriteLine($"SafeGuard:{isSafeGuard}");
             Console.WriteLine($"Sunday Event (-30% destroy below 21):{isSundayEvent}");
             Console.WriteLine($"StarCatch:{isStarCatch}");
             Console.WriteLine($"Total Try:{totalTry}");
@@ -76,10 +76,6 @@ namespace MaplestorySfSimulator.SfMax30
                 float spares = (float)totalTry / dictResult[i];
                 Console.WriteLine($"{i} star => \t{spares:0.00} spares");
             }
-            Console.ReadLine();
-
-
-
         }
 
         static Dictionary<int, int> SfThread(int count, bool isSafeGuard, bool isSundayEvent, bool isStarCatch)
