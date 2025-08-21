@@ -11,12 +11,12 @@
     17 star =>      1.00 spares
     18 star =>      1.07 spares
     19 star =>      1.29 spares
-    20 star =>      1.88 spares
-    21 star =>      2.29 spares
-    22 star =>      3.59 spares
-    23 star =>      57.68 spares
-    24 star =>      2637.76 spares
-    25 star =>      251889.20 spares
+    20 star =>      1.79 spares
+    21 star =>      2.19 spares
+    22 star =>      3.42 spares
+    23 star =>      48.99 spares
+    24 star =>      2201.53 spares
+    25 star =>      207900.20 spares
 </details>
 
 <details>
