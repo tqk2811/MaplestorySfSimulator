@@ -101,6 +101,8 @@ namespace MaplestorySfSimulator.SfMax25
                         {
                             if(dropCount == 1)
                             {
+                                //start--;
+                                //start++;//double drop -> free gain 1 star
                                 dropCount = 0;
                             }
                             else
