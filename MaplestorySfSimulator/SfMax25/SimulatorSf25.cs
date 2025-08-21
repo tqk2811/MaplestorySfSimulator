@@ -91,6 +91,7 @@ namespace MaplestorySfSimulator.SfMax25
         {
             int start = isSafeGuard ? 17 : 15;
             int max = start;
+            int dropCount = 0;
             while (start < 25)
             {
                 switch (dict[start].Enhance(start, isSafeGuard, isStarCatch))
@@ -98,7 +99,19 @@ namespace MaplestorySfSimulator.SfMax25
                     case EnhanceResult.Failure:
                         if ((isSafeGuard ? start != 17 : start != 15) && start != 20)
                         {
-                            start--;
+                            if(dropCount == 1)
+                            {
+                                dropCount = 0;
+                            }
+                            else
+                            {
+                                start--;
+                                dropCount++;
+                            }
+                        }
+                        else
+                        {
+                            dropCount = 0;
                         }
                         break;
 
@@ -107,6 +120,7 @@ namespace MaplestorySfSimulator.SfMax25
 
                     case EnhanceResult.Success:
                         start++;
+                        dropCount = 0;
                         max = Math.Max(start, max);
                         break;
                 }
