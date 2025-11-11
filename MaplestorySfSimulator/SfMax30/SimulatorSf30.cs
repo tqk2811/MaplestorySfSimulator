@@ -68,7 +68,7 @@ namespace MaplestorySfSimulator.SfMax30
 
             //print result
             Console.WriteLine($"SafeGuard:{isSafeGuard}");
-            Console.WriteLine($"Sunday Event (-30% destroy below 21):{isSundayEvent}");
+            Console.WriteLine($"Sunday Event (-30% destroy below {SfData30.SundayEventBelow}):{isSundayEvent}");
             Console.WriteLine($"StarCatch:{isStarCatch}");
             Console.WriteLine($"Total Try:{totalTry}");
             for (int i = 15; i <= 30; i++)

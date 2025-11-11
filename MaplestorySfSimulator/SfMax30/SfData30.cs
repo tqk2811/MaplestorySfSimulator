@@ -2,6 +2,7 @@
 {
     class SfData30
     {
+        public static int SundayEventBelow { get; set; } = 22;
         public SfData30(float success, float destroy, bool isAllowSG = false)
         {
             float destroyRateOfFailed = destroy / (1 - success);
@@ -44,7 +45,7 @@
                 if (random < SuccessRate_StarCatch)
                     return EnhanceResult.Success;
 
-                if (isSundayEvent && currentLevel < 21)
+                if (isSundayEvent && currentLevel < SundayEventBelow)
                 {
                     if (random < SuccessRateAndDestroyRate_SunDayEvent_StarCatch)
                         return EnhanceResult.Destroy;
@@ -60,7 +61,7 @@
                 if (random < SuccessRate)
                     return EnhanceResult.Success;
 
-                if (isSundayEvent && currentLevel < 21)
+                if (isSundayEvent && currentLevel < SundayEventBelow)
                 {
                     if (random < SuccessRateAndDestroyRate_SunDayEvent)
                         return EnhanceResult.Destroy;
