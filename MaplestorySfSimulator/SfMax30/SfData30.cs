@@ -2,7 +2,7 @@
 {
     class SfData30
     {
-        public static int SundayEventBelow { get; set; } = 22;
+        public static int SundayEventBelow { get; set; } = 21;
         public SfData30(float success, float destroy, bool isAllowSG = false)
         {
             float destroyRateOfFailed = destroy / (1 - success);
