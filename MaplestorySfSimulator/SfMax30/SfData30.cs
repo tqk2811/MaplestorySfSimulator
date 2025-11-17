@@ -2,6 +2,8 @@
 {
     class SfData30
     {
+        //[Updated 11/11/25] 30% reduced chance of item destruction when enhancing items below 21-Stars
+        //https://www.nexon.com/maplestory/news/update/32522/updated-11-14-v-264-every-little-thing-every-precious-thing-patch-notes#SunnySunday
         public static int SundayEventBelow { get; set; } = 21;
         public SfData30(float success, float destroy, bool isAllowSG = false)
         {
