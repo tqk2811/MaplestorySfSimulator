@@ -10,6 +10,7 @@ namespace MaplestorySfSimulator.SfMax30
     internal static class SimulatorSf30
     {
         //https://maplestory.nexon.com/testworld/news/all/88
+        //https://www.nexon.com/maplestory/news/update/32522/updated-11-14-v-264-every-little-thing-every-precious-thing-patch-notes#StarForceRevamp
         static readonly IReadOnlyDictionary<int, SfData30> dict = new Dictionary<int, SfData30>()
         {
             { 15, new SfData30(0.30f, 0.0210f, true)  },
